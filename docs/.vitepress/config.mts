@@ -265,7 +265,7 @@ export default defineConfigWithTheme<DefaultTheme.Config>({
       },
       {
         text: '游戏数据',
-        link: 'https://dev.233leyuan.com/#/admin/BasicData'
+        link: 'https://doc.233leyuan.com/operate/BasicData.html'
       },
       {
         text: '财务结算',
