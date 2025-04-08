@@ -118,6 +118,7 @@ export default defineConfigWithTheme<DefaultTheme.Config>({
           { text: '游戏上传', link: '/operate/game_upload.md' },
           { text: '游戏认领', link: '/operate/game_claim.md' },
           { text: '新游预约', link: '/operate/game_reservation.md' },
+          { text: '游戏数据', link: '/operate/BasicData.md' },
           { text: '公告推送', link: '/operate/Announcement&push.md' },
           { text: '礼包管理', link: '/purchase/gift_pack.md' },
           { text: '福利礼包', link: '/operate/gift_code.md' },
@@ -264,7 +265,7 @@ export default defineConfigWithTheme<DefaultTheme.Config>({
       },
       {
         text: '游戏数据',
-        link: 'https://dev.233leyuan.com/#/admin/all-game-data'
+        link: 'https://dev.233leyuan.com/#/admin/BasicData'
       },
       {
         text: '财务结算',
