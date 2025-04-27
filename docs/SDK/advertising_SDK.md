@@ -11,6 +11,7 @@
 | v1.0.5   | 2021.08.25 | 添加Banner广告的支持                                         |
 | v1.0.6   | 2022.01.11 | 1、添加关闭Banner广告的功能 2、添加开启或关闭个性化广告推荐的开关 |
 | v1.0.7   | 2022.07.12 | 修复部分bug提升稳定性                                        |
+| v1.0.8   | 2025.04.27 | 1.优化错误码返回 2.修复bug                                   |
 
 ## SDK说明
 
@@ -40,14 +41,14 @@
 
 ### SDK集成
 
-下载[广告SDK](https://qn-cdn.233leyuan.com/online/5sar74h2kQlk1724308073642.zip)解压并将mpg-cm-v1.0.7.aar文件复制到您项目Project/app/libs文件夹下。
+下载[广告SDK](https://release.233leyuan.com/online/qucZZAbJpzaw1745721735608.zip)解压并将mpg-cm-v1.0.8.aar文件复制到您项目Project/app/libs文件夹下。
 
 在您app的build.gradle中添加：
 
 ```bash
 dependencies {
     ...
-    implementation files('libs/mpg-cm-v1.0.7.aar')
+    implementation files('libs/mpg-cm-v1.0.8.aar')
 }
 ```
 
@@ -58,7 +59,14 @@ dependencies {
 示例代码
 
 ```java
-MetaAdApi.get().init(application, APP_KEY, new InitCallback() {
+    /**
+     * 初始化接口
+     *
+     * @param application {@link Application}
+     * @param appKey      密钥key
+     * @param callback    初始化化结果回调
+     */
+    MetaAdApi.get().init(application, APP_KEY, new InitCallback() {
             @Override
             public void onInitSuccess() {
                 Log.d(TAG, "onInitSuccess");
@@ -68,6 +76,13 @@ MetaAdApi.get().init(application, APP_KEY, new InitCallback() {
               Log.d(TAG, String.format("onInitFailed: code: %1d,  msg: %2s", errorCode, errorMsg));
             }
         });
+
+    /**
+     * 是否已经初始化
+     * @return true: 已初始化；false: 未初始化
+     */
+    MetaAdApi.get().isInitialized();
+
 ```
 
 ### 视频广告接口
