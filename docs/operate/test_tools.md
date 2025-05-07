@@ -39,8 +39,6 @@
 
 1. 点击32位助手自测工具
 
-![output](https://arkimg.ark.online/output.png)
-
 2. 输入安装游戏的包名点击加载，首次安装需要先安装233乐园32位助手
 
 ![img](https://arkimg.ark.online/(null)-20240527172734969.png)
