@@ -88,12 +88,12 @@ dependencies {
 
 ### 视频广告接口
 
-视频广告包含激励视频&全屏视频两种广告样式
+视频广告包含激励视频广告样式
 
 示例代码 
 
 ```java
-//pos: int值；平台申请的激励视频或全屏视频广告位ID
+//pos: int值；平台申请的激励视频广告位ID
  MetaAdApi.get().showVideoAd(pos, new IAdCallback.IVideoIAdCallback() {
                 @Override
                 public void onAdShow() {
@@ -131,70 +131,6 @@ dependencies {
                     Log.d("MetaAdApi", "onAdClose");
                 }
             });
-```
-
-### 插屏广告接口
-
-示例代码： 
-
-```java
-//pos: int值；平台申请的插屏类型广告位ID
-MetaAdApi.get().showInterstitialAd(pos, new IAdCallback() {
-            @Override
-            public void onAdShow() {
-                //广告展示
-            }
-            @Override
-            public void onAdShowFailed(int errCode, String errMsg) {
-                //展示失败
-            }
-            @Override
-            public void onAdClick() {
-                //广告被点击
-            }
-            @Override
-            public void onAdClose() {
-                //广告被关闭
-            }
-        });
-```
-
-### Banner广告接口
-
-::: danger 注意
-该广告类型暂停使用，不进行展示
-:::
-
-示例代码：
-
-```java
-//pos: int值；平台申请的Banner类型广告位ID
-MetaAdApi.get().showBannerAd(pos, new IAdCallback() {
-            @Override
-            public void onAdShow() {
-                //广告展示
-            }
-            @Override
-            public void onAdShowFailed(String s) {
-                //展示失败
-            }
-            @Override
-            public void onAdClick() {
-                //广告被点击
-            }
-            @Override
-            public void onAdClose() {
-                //广告被关闭
-            }
-        });
-```
-
-### 关闭Banner广告
-
-示例代码：
-
-```java
-MetaAdApi.get().closeBannerAd();
 ```
 
 ### 广告个性化推荐开关接口
