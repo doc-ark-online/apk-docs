@@ -23,7 +23,7 @@
 | V3.2.9    | 2025/02/18 | 1.修复支付折扣优惠券计算问题 <br/>2.修复个别机型屏幕适配问题 |
 | V3.2.10    | 2025/02/28 |  合规优化，移除无用权限和数据 |
 | V3.2.11    | 2025/03/07 |  1.合规优化，移除无用权限和数据 <br/>2.SDK服务异常时增加弹窗提示<br/>3.剥离内嵌支付宝SDK代码依赖，转换为外部依赖|
-| V3.2.13    | 2025/03/07 |  1.优化初始化接口，提升初始化成功率 <br/>2. 其他内部异常优化 |
+| V3.2.13    | 2025/06/30 |  1.优化初始化接口，提升初始化成功率 <br/>2. 其他内部异常优化 |
 
 ## SDK说明
 
@@ -193,7 +193,7 @@ VALUES;
 ```
 
 ::: danger 注意  
-SDK编译使用android30编译，若游戏的编译环境低于android SDK 29的，需要在游戏的AndroidManifest.xml中添加以下配置方可编译通过。
+SDK编译使用android30编译，若游戏的编译环境小于android SDK 29的，需要在游戏的AndroidManifest.xml中添加以下配置方可编译通过。
 若出现 `java.lang.SecurityException: Media projections require a foreground service of type ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PROJECTION`崩溃日志，可以配置下列内容
 ::: 
 
