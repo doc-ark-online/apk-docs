@@ -13,6 +13,7 @@
 | v1.0.7   | 2022.07.12 | 修复部分bug提升稳定性                          |
 | v1.0.8   | 2025.04.27 | 1.优化错误码返回 2.修复bug                     |
 | v1.0.9   | 2025.05.23 | 1.兼容低版本gradle和java环境                  |
+| v1.1.0   | 2025.05.23 | 1.支持系统环境 2.更新 unity 插件 3.去出废弃接口方法（onAdClose(Boolean aBoolean)）   |
 
 ## SDK说明
 
@@ -42,14 +43,16 @@
 
 ### SDK集成
 
-下载[广告SDK](https://release.233leyuan.com/online/onI7JRjYQuHi1747969674267.zip)解压并将mpg-cm-v1.0.9.aar文件复制到您项目Project/app/libs文件夹下。
+下载[广告SDK](https://release.233leyuan.com/online/5vX6zTWrbHZ31755411497205.zip)解压并将mpg-cm-v1.1.0.aar文件复制到您项目Project/app/libs文件夹下。
+
+zip文件夹内包含demo工程和meta-ad-demo-1.1.0.apk，可以使用demo测试和参考
 
 在您app的build.gradle中添加：
 
 ```bash
 dependencies {
     ...
-    implementation files('libs/mpg-cm-v1.0.9.aar')
+    implementation files('libs/mpg-cm-v1.1.0.aar')
 }
 ```
 
@@ -90,6 +93,8 @@ dependencies {
 
 视频广告包含激励视频&全屏视频两种广告样式
 
+v1.1.0版本升级去除了废弃方法```public void onAdClose(Boolean aBoolean)```，从低版本 sdk 升级上来只需要删除此方法即可
+
 示例代码 
 
 ```java
@@ -124,11 +129,6 @@ dependencies {
                 public void onAdReward() {
                     //发放激励
                     Log.d("MetaAdApi", "onAdReward");
-                }
-                @Override
-                public void onAdClose(Boolean aBoolean) {
-                    // 广告关闭, 废弃 ,建议使用onAdClose 和 onAdReward
-                    Log.d("MetaAdApi", "onAdClose");
                 }
             });
 ```
