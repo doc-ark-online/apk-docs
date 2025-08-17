@@ -23,6 +23,7 @@
 | V3.2.9    | 2025/02/18 | 1.修复支付折扣优惠券计算问题 <br/>2.修复个别机型屏幕适配问题 |
 | V3.2.10    | 2025/02/28 |  合规优化，移除无用权限和数据 |
 | V3.2.11    | 2025/03/07 |  1.合规优化，移除无用权限和数据 <br/>2.SDK服务异常时增加弹窗提示<br/>3.剥离内嵌支付宝SDK代码依赖，转换为外部依赖|
+| V3.2.13    | 2025/06/30 |  1.优化初始化接口，提升初始化成功率 <br/>2. 其他内部异常优化 |
 
 ## SDK说明
 
@@ -38,6 +39,16 @@
 
 如果您是用户，请在使用我们的服务前阅读 **[《233乐园内购SDK隐私政策》](../protocol/233乐园内购SDK隐私政策.md) 与 [《233乐园内购SDK合规使用说明》](../protocol/233乐园内购SDK合规使用说明.md)**，了解SDK对个人信息收集范围、处理目的以及权限使用情况。充分理解后再开始使用我们的服务。
 
+ 
+**提审时提交的隐私协议链接中，需要把下列内容加入第三方SDK的介绍目录：** 
+
+第三方SDK名称：233乐园内购SDK  
+第三方SDK提供方的公司名称：北京龙威互动科技有限公司   
+使用目的及功能场景： 为接入的游戏提供233乐园账户登录、实名认证、防沉迷、充值、更新、游戏内容展示等功能  
+处理的个人信息类型：设备Android ID、设备名称、设备型号、设备操作系统版本、wifi状态、姓名、身份证号    
+第三方SDK隐私政策链接：https://doc.233leyuan.com/protocol/233乐园内购SDK隐私政策.html
+ 
+
 ## SDK集成
 
 ### 申请应用的appKey
@@ -46,7 +57,7 @@
 
 ### 导入aar包
 
-下载[内购SDK](https://release.233leyuan.com/online/KmsTF43Edspf1741318423761.zip)解压并将**mpg-pay-\*.aar**复制到您项目Project/app/libs文件夹下。
+下载[内购SDK](https://release.233leyuan.com/online/G1Tk0svW9uXN1751012968669.zip)解压并将**mpg-pay-\*.aar**复制到您项目Project/app/libs文件夹下。
 
 在您app的build.gradle中添加：
 
@@ -54,16 +65,16 @@
 dependencies {
     ...
     implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation files('libs/mpg-pay-v3.2.11.aar')
+    implementation files('libs/mpg-pay-v3.2.13.aar')
     
     //SDK所需的第三方依赖
     implementation 'com.github.bumptech.glide:glide:4.9.0'     
     implementation 'com.alipay.sdk:alipaysdk-android:+@aar' // 支付宝sdk依赖 3.2.11以上版本必须添加
 }
 ```
-
 ::: danger 注意
-需要您的项目中依赖appcompat-v7的包。
+SDK依赖的glide升级至4.9.0及以上，并确认是否需要混淆代码，避免悬浮球录屏功能失效/闪退
+3.2.11及以上版本SDK需要额外集成支付宝SDK，避免拉起支付宝失败/闪退
 :::
 
 如果您需要代码混淆，请在`proguard-rules.pro`文件（或其他混淆配置文件）中添加：
@@ -182,8 +193,8 @@ VALUES;
 ```
 
 ::: danger 注意  
-SDK编译使用android30编译，若游戏的编译环境低于android SDK 29的，需要在游戏的AndroidManifest.xml中添加以下配置方可编译通过。
-高于29的请保持aar里面的配置不变，避免崩溃 `java.lang.SecurityException: Media projections require a foreground service of type ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PROJECTION`
+SDK编译使用android30编译，若游戏的编译环境小于android SDK 29的，需要在游戏的AndroidManifest.xml中添加以下配置方可编译通过。
+若出现 `java.lang.SecurityException: Media projections require a foreground service of type ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PROJECTION`崩溃日志，可以配置下列内容
 ::: 
 
 ```xml

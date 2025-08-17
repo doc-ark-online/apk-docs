@@ -91,14 +91,18 @@ dependencies {
 
 ### 视频广告接口
 
-视频广告包含激励视频&全屏视频两种广告样式
+视频广告包含激励视频广告样式，
+
+**重要说明：务必实现播放失败回调逻辑**
+
+若未接入此回调，广告播放流程中发生异常时，会引发游戏进程阻塞（卡死），且后续平台审核也将无法通过
 
 v1.1.0版本升级去除了废弃方法```public void onAdClose(Boolean aBoolean)```，从低版本 sdk 升级上来只需要删除此方法即可
 
 示例代码 
 
 ```java
-//pos: int值；平台申请的激励视频或全屏视频广告位ID
+//pos: int值；平台申请的激励视频广告位ID
  MetaAdApi.get().showVideoAd(pos, new IAdCallback.IVideoIAdCallback() {
                 @Override
                 public void onAdShow() {
@@ -131,70 +135,6 @@ v1.1.0版本升级去除了废弃方法```public void onAdClose(Boolean aBoolean
                     Log.d("MetaAdApi", "onAdReward");
                 }
             });
-```
-
-### 插屏广告接口
-
-示例代码： 
-
-```java
-//pos: int值；平台申请的插屏类型广告位ID
-MetaAdApi.get().showInterstitialAd(pos, new IAdCallback() {
-            @Override
-            public void onAdShow() {
-                //广告展示
-            }
-            @Override
-            public void onAdShowFailed(int errCode, String errMsg) {
-                //展示失败
-            }
-            @Override
-            public void onAdClick() {
-                //广告被点击
-            }
-            @Override
-            public void onAdClose() {
-                //广告被关闭
-            }
-        });
-```
-
-### Banner广告接口
-
-::: danger 注意
-该广告类型暂停使用，不进行展示
-:::
-
-示例代码：
-
-```java
-//pos: int值；平台申请的Banner类型广告位ID
-MetaAdApi.get().showBannerAd(pos, new IAdCallback() {
-            @Override
-            public void onAdShow() {
-                //广告展示
-            }
-            @Override
-            public void onAdShowFailed(String s) {
-                //展示失败
-            }
-            @Override
-            public void onAdClick() {
-                //广告被点击
-            }
-            @Override
-            public void onAdClose() {
-                //广告被关闭
-            }
-        });
-```
-
-### 关闭Banner广告
-
-示例代码：
-
-```java
-MetaAdApi.get().closeBannerAd();
 ```
 
 ### 广告个性化推荐开关接口
