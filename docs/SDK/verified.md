@@ -2,7 +2,7 @@
 
 ## 接口方式
 
-**接口地址:** `http://www.233leyuan.com/apiserv/intermodal/nppa/getPi` 
+**接口地址:** `http://openapi.metaapp.cn/apiserv/intermodal/nppa/getPi` 
 
 **请求方式:**: `get` 
 
@@ -27,7 +27,7 @@ String md5 = DigestUtils.md5DigestAsHex(content.getBytes());
 
 ## 参考案例
 
-http://www.233leyuan.com/apiserv/intermodal/nppa/getPi?cpid={cpid}&appKey={appKey}&userId={userId}&digest={digest}
+http://openapi.metaapp.cn/apiserv/intermodal/nppa/getPi?cpid={cpid}&appKey={appKey}&userId={userId}&digest={digest}
 
 ## 接口返回示例
 
