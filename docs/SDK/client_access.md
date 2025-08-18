@@ -390,7 +390,8 @@ MetaApi.unregisterAccountChangedListener(mAccountChangedListener);
 
 ### 支付下单接口
 
-::: tip 请前往开发者后台-发版管理-参数设置配置回调地址，否则无法发货成功:::
+::: tip 请前往开发者后台-发版管理-参数设置配置回调地址，否则无法发货成功
+:::
 
 **接口说明:**
 
