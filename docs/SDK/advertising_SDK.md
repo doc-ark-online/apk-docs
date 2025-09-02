@@ -13,6 +13,7 @@
 | v1.0.7   | 2022.07.12 | 修复部分bug提升稳定性                          |
 | v1.0.8   | 2025.04.27 | 1.优化错误码返回 2.修复bug                     |
 | v1.0.9   | 2025.05.23 | 1.兼容低版本gradle和java环境                  |
+| v1.1.0   | 2025.05.23 | 1.支持系统环境 2.更新 unity 插件 3.去出废弃接口方法（onAdClose(Boolean aBoolean)）   |
 
 ## SDK说明
 
@@ -42,14 +43,16 @@
 
 ### SDK集成
 
-下载[广告SDK](https://release.233leyuan.com/online/onI7JRjYQuHi1747969674267.zip)解压并将mpg-cm-v1.0.9.aar文件复制到您项目Project/app/libs文件夹下。
+下载[广告SDK](https://release.233leyuan.com/online/5vX6zTWrbHZ31755411497205.zip)解压并将mpg-cm-v1.1.0.aar文件复制到您项目Project/app/libs文件夹下。
+
+zip文件夹内包含demo工程和meta-ad-demo-1.1.0.apk，可以使用demo测试和参考
 
 在您app的build.gradle中添加：
 
 ```bash
 dependencies {
     ...
-    implementation files('libs/mpg-cm-v1.0.9.aar')
+    implementation files('libs/mpg-cm-v1.1.0.aar')
 }
 ```
 
@@ -94,6 +97,8 @@ dependencies {
 
 若未接入此回调，广告播放流程中发生异常时，会引发游戏进程阻塞（卡死），且后续平台审核也将无法通过
 
+v1.1.0版本升级去除了废弃方法```public void onAdClose(Boolean aBoolean)```，从低版本 sdk 升级上来只需要删除此方法即可
+
 示例代码 
 
 ```java
@@ -128,11 +133,6 @@ dependencies {
                 public void onAdReward() {
                     //发放激励
                     Log.d("MetaAdApi", "onAdReward");
-                }
-                @Override
-                public void onAdClose(Boolean aBoolean) {
-                    // 广告关闭, 废弃 ,建议使用onAdClose 和 onAdReward
-                    Log.d("MetaAdApi", "onAdClose");
                 }
             });
 ```
@@ -171,8 +171,6 @@ if (MetaAdApi.get().isInSupportVersion(int type)) {
 
 ### 错误码参考
 
- 
-
 | 错误码 | 错误信息                          | 处理方案                                                     |
 | ------ | --------------------------------- | ------------------------------------------------------------ |
 | 200    | 请求成功                          |                                                              |
@@ -182,3 +180,24 @@ if (MetaAdApi.get().isInSupportVersion(int type)) {
 | 10004  | 参数无效                          | 包名、appkey有误，请确认参数                                 |
 | 30007  | 233乐园不支持此类型广告           | 未使用最新自测工具打开游戏，自测工具见SDK压缩包内            |
 | 30008  | 第三方Sdk引发的错误               | onAdShowFailed 30008一般有以下情况： ①广告位没有关联； ②广告pos值错了，检查下插屏/全屏的pos是不是正确的。 ③banner请求过于频繁会报错，需要调整间隔时间为60s |
+
+### 打印日志
+
+在代码中添加如下代码(在调用初始化之前设置)，即可打印 sdk 日志，可以过滤日志```MetaAdApiImpl```
+
+```java
+MetaAdApi.get().setLogLevel(5);
+```
+
+### 常见问题
+
+1. 出现isInSupportVersion返回false
+> 答：请检查是否使用了最新的自测工具打开游戏
+2. 出现onAdShowFailed 30008错误
+> 答：请检查是否使用了最新的自测工具打开游戏，且广告位是否关联了广告
+3. 出现onAdShowFailed 10004错误
+> 答：请检查是否使用了最新的自测工具打开游戏，包名、appkey是否正确
+4. 出现onAdShowFailed 20003错误
+> 答：请检查是否使用了最新的自测工具打开游戏，并检查 sdk 是否初始化成功
+5. 如何反馈问题
+> 答：可以把日志打开并过滤```MetaAdApiImpl```的日志发给我们，并且带上录屏
