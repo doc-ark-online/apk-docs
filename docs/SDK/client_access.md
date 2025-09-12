@@ -59,11 +59,11 @@
 第三方SDK隐私政策链接：https://doc.233leyuan.com/protocol/233乐园内购SDK隐私政策.html
 
 
-第三方 SDK 名称：App 支付宝客户端 SDK  
+第三方 SDK 名称：App 支付宝客户端 SDK     
 第三方名称：支付宝（中国）网络技术有限公司   
-收集的个人信息类型：Android ID、OAID、AAID、SSID、BSSID；系统设置、系统属性、设备型号、设备品牌、操作系统；IP 地址、网络类型、运营商信息、Wi-Fi 状态、Wi-Fi 参数、Wi-Fi 列表；传感器信息（传感器列表）；设备屏幕密度  
-使用目的：保障用户账户和资金安全以及支付服务的安全稳定运行；履行反洗钱、反恐怖融资、反电信网络诈骗等法定义务；实现网络链路的选择和优化，以提升用户体验  
-第三方SDK隐私政策链接：[App 支付宝客户端 SDK 隐私说明](https://opendocs.alipay.com/common/02kiq3)  
+收集的个人信息类型：Android ID、OAID、AAID、SSID、BSSID；系统设置、系统属性、设备型号、设备品牌、操作系统；IP 地址、网络类型、运营商信息、Wi-Fi 状态、Wi-Fi 参数、Wi-Fi 列表；传感器信息（传感器列表）；设备屏幕密度     
+使用目的：保障用户账户和资金安全以及支付服务的安全稳定运行；履行反洗钱、反恐怖融资、反电信网络诈骗等法定义务；实现网络链路的选择和优化，以提升用户体验     
+第三方SDK隐私政策链接：[App 支付宝客户端 SDK 隐私说明](https://opendocs.alipay.com/common/02kiq3)     
  
 
 ## SDK集成
