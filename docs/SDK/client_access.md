@@ -667,4 +667,4 @@ MetaApi.exitGame(this, new OnExitCallback() {
         });
 ```
 
-## 具体用法可以参考[DEMO](https://cdn.233xyx.com/online/U9ClTU9i2AsQ1709024016097.zip)
+## 具体用法可以参考[DEMO]
