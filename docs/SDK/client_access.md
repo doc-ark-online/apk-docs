@@ -666,5 +666,4 @@ MetaApi.exitGame(this, new OnExitCallback() {
             }
         });
 ```
-
-## 具体用法可以参考[DEMO]
+ 
