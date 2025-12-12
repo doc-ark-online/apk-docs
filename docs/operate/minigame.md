@@ -6,7 +6,7 @@
 
 1. 完成企业认证，注册开发者账号（未注册时需操作）：[企业认证流程](https://doc.233leyuan.com/operate/enterprise_certification.html) ；
 
-3. 从【团结开发者后台】获取临时 token（用于填写小游戏 ID）；
+3. 从【[团结开发者后台](https://minihost.tuanjie.cn)】获取临时 token（用于填写小游戏 ID）；
 
 | ![img](https://release.233leyuan.com/athena/online/b8088474d37244299bff57b65ad680e6_706589153.webp) | ![img](https://release.233leyuan.com/athena/online/1c2d692537584731b0ce7497d63f30b4_706589152.webp) |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
