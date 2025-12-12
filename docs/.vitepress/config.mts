@@ -111,11 +111,13 @@ export default defineConfigWithTheme<DefaultTheme.Config>({
             text: '游戏创建',
             items: [
               { text: '联运游戏创建', link: '/operate/intermodal_games.md' },
-              { text: '官包测试创建', link: '/operate/official_test.md' }
+              { text: '官包测试创建', link: '/operate/official_test.md' },
+              { text: '小游戏上架', link: '/operate/minigame.md' }
             ]
           },
           { text: '自测工具', link: '/operate/test_tools.md' },
           { text: '游戏上传', link: '/operate/game_upload.md' },
+           
           { text: '游戏认领', link: '/operate/game_claim.md' },
           { text: '新游预约', link: '/operate/game_reservation.md' },
           { text: '游戏数据', link: '/operate/BasicData.md' },
