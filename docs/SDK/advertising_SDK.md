@@ -14,7 +14,7 @@
 | v1.0.8   | 2025.04.27 | 1.优化错误码返回 2.修复bug                     |
 | v1.0.9   | 2025.05.23 | 1.兼容低版本gradle和java环境                  |
 | v1.1.0   | 2025.09.02 | 1.支持系统环境 2.更新 unity 插件 3.去出废弃接口方法（onAdClose(Boolean aBoolean)）   |
-
+| v1.1.1   | 2026.01.14 | 1.适配Android14广播问题   |
 ## SDK说明
 
 **SDK开发者：** 北京龙威互动科技有限公司
@@ -43,16 +43,16 @@
 
 ### SDK集成
 
-下载[广告SDK](https://release.233leyuan.com/online/5vX6zTWrbHZ31755411497205.zip)解压并将mpg-cm-v1.1.0.aar文件复制到您项目Project/app/libs文件夹下。
+下载[广告SDK](https://release.233leyuan.com/online/ihbpilRc6w4r1768373644379.zip)解压并将mpg-cm-v1.1.1.aar文件复制到您项目Project/app/libs文件夹下。
 
-zip文件夹内包含demo工程和meta-ad-demo-1.1.0.apk，可以使用demo测试和参考
+zip文件夹内包含demo工程，可以使用demo测试和参考
 
 在您app的build.gradle中添加：
 
 ```bash
 dependencies {
     ...
-    implementation files('libs/mpg-cm-v1.1.0.aar')
+    implementation files('libs/mpg-cm-v1.1.1.aar')
 }
 ```
 
