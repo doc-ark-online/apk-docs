@@ -43,7 +43,7 @@
 
 ### SDK集成
 
-下载[广告SDK](https://release.233leyuan.com/online/ihbpilRc6w4r1768373644379.zip)解压并将mpg-cm-v1.1.1.aar文件复制到您项目Project/app/libs文件夹下。
+下载[广告SDK](https://release.233party.com/online/LWtRyjMNgjzq1770615459834.zip)解压并将mpg-cm-v1.1.1.aar文件复制到您项目Project/app/libs文件夹下。
 
 zip文件夹内包含demo工程，可以使用demo测试和参考
 
