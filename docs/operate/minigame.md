@@ -6,17 +6,19 @@
 
 1. 完成企业认证，注册开发者账号（未注册时需操作）：[企业认证流程](https://doc.233leyuan.com/operate/enterprise_certification.html) ；
 
-2. 从【[团结开发者后台](https://minihost.tuanjie.cn)】获取临时 token（用于填写小游戏 ID）；
+2. 从【[团结开发者后台](https://minihost.tuanjie.cn)】点击"渠道关联"获取密钥（用于填写小游戏 ID）；
 
 
-![img](https://release.233leyuan.com/athena/online/1c2d692537584731b0ce7497d63f30b4_706589152.webp)
+| ![img](https://release.233leyuan.com/athena/online/3dcb7a7225004032b21c538938a1b963_852977233.webp) | ![img](https://release.233leyuan.com/athena/online/1c2d692537584731b0ce7497d63f30b4_706589152.webp) |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+
 
 
 ### （二）创建游戏操作
 
 1. 前往【233 乐园开发者首页】，点击创建游戏；
    
-2. 游戏类型选择「小游戏」，小游戏 ID 填写前置准备中获取的【团结后台临时 token】；
+2. 游戏类型选择「小游戏」，小游戏 ID 填写前置准备中获取的【渠道关联密钥】；
 
 ![img](https://release.233leyuan.com/athena/online/09718207613a46e39424edc9a89c5a0a_706589151.webp)
 
