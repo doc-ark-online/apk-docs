@@ -1,5 +1,7 @@
 import type { DefaultTheme } from 'doc-theme-323'
 import { defineConfigWithTheme } from 'vitepress'
+import { copyRobotsTxt, disableLeanPages, patchDistAssets } from './disableLeanPages'
+import { stripDocumentContent, stripPostRender } from './stripContent'
 
 export const sidebar: DefaultTheme.Config['sidebar'] = [
   {
@@ -14,6 +16,7 @@ export default defineConfigWithTheme<DefaultTheme.Config>({
   appearance: false,
   description: '开发者平台文档',
   outDir: '../dist',
+  metaChunk: true,
   head: [
     [
       'meta',
@@ -51,6 +54,19 @@ export default defineConfigWithTheme<DefaultTheme.Config>({
         rel: 'icon',
         href: 'https://cdn.233xyx.com/online/CKuKtOyybKPQ1716443452384.png'
       }
+    ],
+    [
+      'script',
+      {},
+      `
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7ce3d8cdb9d1a9dd641d04c9749d5ec9";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+`
     ]
   ],
   themeConfig: {
@@ -311,5 +327,16 @@ export default defineConfigWithTheme<DefaultTheme.Config>({
     pandora: {
       type: 'apk-product'
     }
+  },
+  postRender: stripPostRender,
+  transformHtml(code) {
+    return stripDocumentContent(code)
+  },
+  buildEnd(siteConfig) {
+    patchDistAssets(siteConfig.outDir)
+    copyRobotsTxt(siteConfig.outDir)
+  },
+  vite: {
+    plugins: [disableLeanPages()]
   }
 })
