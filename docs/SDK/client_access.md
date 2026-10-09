@@ -12,6 +12,7 @@
 
 | SDK版本号 | 修订日期 | 说明 |
 | --------- | ---------- | ------- |
+| V3.2.23    | 2026/10/09 |  1.提升登录验证码安全性 |
 | V3.2.22    | 2026/08/27 |  1.修复版本更新超过2G下载失败问题 2.增加形象设置功能 |
 | V3.2.19    | 2026/05/07 |  1.优化UI适配问题 2.修复部分bug |
 | V3.2.18    | 2026/01/14 |  1.优化隐私协议弹窗UI适配问题 |
@@ -81,7 +82,7 @@
 
 ### 导入aar包
 
-下载[内购SDK](https://release.233leyuan.com/online/3DSE3eAzXrE21787828017107.zip)解压并将**mpg-pay-\*.aar**复制到您项目Project/app/libs文件夹下。
+下载[内购SDK](https://release.233leyuan.com/online/qDxuRIeAIJBq1791527249852.zip)解压并将**mpg-pay-\*.aar**复制到您项目Project/app/libs文件夹下。
 
 在您app的build.gradle中添加：
 
@@ -89,7 +90,7 @@
 dependencies {
     ...
     implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation files('libs/mpg-pay-v3.2.22.aar')
+    implementation files('libs/mpg-pay-v3.2.23.aar')
     
     //SDK所需的第三方依赖
     implementation 'com.github.bumptech.glide:glide:4.9.0'     
