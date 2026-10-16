@@ -179,7 +179,7 @@ var _hmt = _hmt || [];
           { text: '新游上线', link: '/purchase/new_game_online.md' },
           { text: '版本更新', link: '/purchase/new_version_update.md' },
           { text: '资源申请', link: '/purchase/general_resources.md' },
-          { text: '消息接入操作说明', link: '/purchase/auto_message.md' },
+          { text: '消息接入', link: '/purchase/auto_message.md' },
           {
             text: '运营社区',
             items: [

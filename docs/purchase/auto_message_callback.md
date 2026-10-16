@@ -110,6 +110,8 @@ GET /auto-msg/callback?from=game&echostr=a1b2c3d4e5f6 HTTP/1.1
 | `pushSuccessCount` | int | Push 成功数 |
 | `internalSuccessCount` | int | 站内信成功数 |
 
+注：上述成功数表示平台侧已发送成功，不代表用户已实际接收。是否触达用户，需结合平台发送策略综合判断。
+
 成功响应：
 
 ```json
