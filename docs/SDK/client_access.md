@@ -12,6 +12,7 @@
 
 | SDK版本号 | 修订日期 | 说明 |
 | --------- | ---------- | ------- |
+| V3.2.24    | 2026/10/16 |  1.新增游戏推送权限查询与申请接口，支持 Android 和 Unity |
 | V3.2.23    | 2026/10/09 |  1.提升登录验证码安全性 |
 | V3.2.22    | 2026/08/27 |  1.修复版本更新超过2G下载失败问题 2.增加形象设置功能 |
 | V3.2.19    | 2026/05/07 |  1.优化UI适配问题 2.修复部分bug |
@@ -82,7 +83,7 @@
 
 ### 导入aar包
 
-下载[内购SDK](https://release.233leyuan.com/online/qDxuRIeAIJBq1791527249852.zip)解压并将**mpg-pay-\*.aar**复制到您项目Project/app/libs文件夹下。
+下载[内购SDK](https://release.233leyuan.com/online/6X9iETtnpsAl1783507417723.zip)解压并将**mpg-pay-\*.aar**复制到您项目Project/app/libs文件夹下。
 
 在您app的build.gradle中添加：
 
@@ -90,7 +91,7 @@
 dependencies {
     ...
     implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation files('libs/mpg-pay-v3.2.23.aar')
+    implementation files('libs/mpg-pay-v3.2.24.aar')
     
     //SDK所需的第三方依赖
     implementation 'com.github.bumptech.glide:glide:4.9.0'     
@@ -649,6 +650,84 @@ MetaApi.showMetaRealNameActivity(RealNameActivity.this, new RealNameAuthenticati
 ```
 
 > 备注：只需要校验return_code即可，return_code = 200时验证成功，return_code = 500时该用户已认证过，其他为认证失败。
+
+### 游戏推送权限（沙盒环境） {#push-permission}
+
+请在 SDK 初始化成功后，在支持该能力的沙盒环境中调用。推送权限为游戏消息分类授权，不是 Android 系统通知权限。
+
+**权限类型**（`com.meta.android.mpg.push.constants.MetaPushPermission`）
+
+| 常量 | 值 | 说明 |
+| --- | --- | --- |
+| `PERMISSION_INTERACTION` | 1 | 互动通知 |
+| `PERMISSION_FRIEND_MESSAGE` | 2 | 好友私信 |
+| `PERMISSION_WELFARE_ACTIVITY` | 3 | 福利活动 |
+| `PERMISSION_SYSTEM_NOTICE` | 4 | 游戏内系统消息 |
+
+#### 查询推送权限
+
+**接口说明：**
+
+```java
+/**
+ * 查询推送权限，不展示授权弹窗。
+ * @param permissions 当前游戏已配置的消息分类，不得为 null 或空数组
+ * @param callback    查询结果回调，不得为 null
+ */
+public static void checkPushPermissions(int[] permissions, GamePushPermissionCallback callback);
+```
+
+**代码示例**
+
+```java
+MetaApi.checkPushPermissions(new int[]{MetaPushPermission.PERMISSION_FRIEND_MESSAGE},
+        new GamePushPermissionCallback() {
+            @Override
+            public void onResult(int code, String message, int[] permissions, boolean[] granted) {
+                if (code == MetaPushResult.CODE_SUCCESS) {
+                    Log.d("GamePush", "好友私信已授权=" + granted[0]);
+                } else {
+                    Log.d("GamePush", "查询失败，code=" + code + ", message=" + message);
+                }
+            }
+        });
+```
+
+#### 申请推送权限
+
+**接口说明：**
+
+```java
+/**
+ * 申请推送权限，由宿主展示授权弹窗。
+ * @param permissions 当前游戏已配置的消息分类，不得为 null 或空数组
+ * @param callback    授权结果回调，不得为 null
+ */
+public static void requestPushPermissions(int[] permissions, GamePushPermissionCallback callback);
+```
+
+**代码示例**
+
+```java
+MetaApi.requestPushPermissions(new int[]{MetaPushPermission.PERMISSION_FRIEND_MESSAGE,
+                MetaPushPermission.PERMISSION_WELFARE_ACTIVITY},
+        new GamePushPermissionCallback() {
+            @Override
+            public void onResult(int code, String message, int[] permissions, boolean[] granted) {
+                if (code == MetaPushResult.CODE_SUCCESS) {
+                    for (int i = 0; i < permissions.length; i++) {
+                        Log.d("GamePush", "权限=" + permissions[i] + ", 已授权=" + granted[i]);
+                    }
+                } else {
+                    Log.d("GamePush", "申请未完成，code=" + code + ", message=" + message);
+                }
+            }
+        });
+```
+
+> 备注：回调位于 `com.meta.android.mpg.push.callback.GamePushPermissionCallback`，结果码位于 `com.meta.android.mpg.push.constants.MetaPushResult`。仅 `code = 0` 时读取状态，`granted[i]` 对应 `permissions[i]`，成功不代表全部授权；失败时数组为空。申请成功后直接使用回调状态，无需再次查询。
+>
+> 回调在 Android 主线程执行，可能同步发生，请先设置等待状态再调用。非沙盒或宿主不兼容返回 10003。
 
 ### 游戏退出接口
 
