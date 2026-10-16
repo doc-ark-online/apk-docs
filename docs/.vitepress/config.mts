@@ -179,6 +179,7 @@ var _hmt = _hmt || [];
           { text: '新游上线', link: '/purchase/new_game_online.md' },
           { text: '版本更新', link: '/purchase/new_version_update.md' },
           { text: '资源申请', link: '/purchase/general_resources.md' },
+          { text: '消息接入', link: '/purchase/auto_message.md' },
           {
             text: '运营社区',
             items: [
@@ -195,6 +196,13 @@ var _hmt = _hmt || [];
               { text: '社区活动', link: '/purchase/community_activity.md' },
               { text: '申请活动', link: '/purchase/event_application.md' },
               { text: '预约活动', link: '/purchase/event_reservation.md' }
+            ]
+          },
+          {
+            text: '自动化消息',
+            items: [
+              { text: '回调地址配置', link: '/purchase/auto_message_callback.md' },
+              { text: '创建消息发送任务', link: '/purchase/create_message_task.md' }
             ]
           }
         ]
