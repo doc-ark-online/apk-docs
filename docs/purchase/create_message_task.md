@@ -45,7 +45,6 @@ Header 信息：查看 [开放平台鉴权](https://doc.233leyuan.com/SDK/open_p
 
 参数说明：
 
-
 | 字段                      | 类型     | 必填  | 描述                                                                                 |
 | ----------------------- | ------ | --- | ---------------------------------------------------------------------------------- |
 | templateId              | long   | 是   | 消息模板 ID。模板须已生效，且其类型在该游戏的消息权限内                                                      |
@@ -53,27 +52,22 @@ Header 信息：查看 [开放平台鉴权](https://doc.233leyuan.com/SDK/open_p
 | scopeType               | int    | 是   | 发送范围。`1` 单个，收件人恰好 1 个；`2` 批量，收件人 1～50 个且 uid 不重复；`3` 按模板类型开关全量发送，`recipients` 必须为空 |
 | timeType                | int    | 是   | 发送时间类型。`1` 实时；`2` 定时                                                               |
 | sendTime                | long   | 否   | 定时发送的毫秒时间戳。`timeType=2` 时必填，且必须大于当前时间；实时发送留空                                       |
-| commonPlaceholderParams | array  | 否   | 本次任务的公共占位参数                                                                        |
+| commonPlaceholderParams | array  | 否   | 本次任务的公共占位参数；支持通过占位符 `MsgLinkLaunchParams` 传入游戏启动参数。                                |
 | recipients              | array  | 否   | 收件人。单个、批量发送时必填；全量发送时必须为空                                                           |
 
-
 `commonPlaceholderParams` / `placeholderParams` 元素：
-
 
 | 字段    | 类型     | 必填  | 描述        |
 | ----- | ------ | --- | --------- |
 | key   | string | 是   | 模板占位符 key |
 | value | string | 是   | 替换值       |
 
-
 `recipients` 元素：
 
-
-| 字段                | 类型     | 必填  | 描述                          |
-| ----------------- | ------ | --- | --------------------------- |
-| uid               | string | 是   | 233 用户 ID，与用户校验接口的 `uid` 相同 |
-| placeholderParams | array  | 否   | 该用户的个性化占位参数，同名 key 覆盖公共参数   |
-
+| 字段                | 类型     | 必填  | 描述                                                                |
+| ----------------- | ------ | --- | ----------------------------------------------------------------- |
+| uid               | string | 是   | 233 用户 ID，与用户校验接口的 `uid` 相同                                       |
+| placeholderParams | array  | 否   | 该用户的个性化占位参数，同名 key 覆盖公共参数；支持通过占位符 `MsgLinkLaunchParams` 传入游戏启动参数。 |
 
 模板里声明的占位 key 必须给齐。全量发送只校验公共参数；单个、批量按「公共参数 ∪ 该用户参数」校验。
 
@@ -91,15 +85,11 @@ Header 信息：查看 [开放平台鉴权](https://doc.233leyuan.com/SDK/open_p
 
 结果说明：
 
-
 | 字段          | 类型     | 描述                                                       |
 | ----------- | ------ | -------------------------------------------------------- |
 | code        | int    | `200` 成功，其它均为失败                                          |
 | message     | string | 结果说明                                                     |
 | data.taskId | long   | 正式消息任务 ID。重复的 `bizTaskId` 返回已有任务 ID。完成回调里的 `taskId` 与此相同 |
-
-
-
 
 ## 发送结果回调
 
@@ -117,7 +107,6 @@ Header 信息：查看 [开放平台鉴权](https://doc.233leyuan.com/SDK/open_p
 }
 ```
 
-
 | 字段                   | 类型     | 说明                      |
 | -------------------- | ------ | ----------------------- |
 | taskId               | long   | 与本接口响应 `data.taskId` 相同 |
@@ -126,13 +115,11 @@ Header 信息：查看 [开放平台鉴权](https://doc.233leyuan.com/SDK/open_p
 | pushSuccessCount     | int    | Push 成功数                |
 | internalSuccessCount | int    | 站内信成功数                  |
 
-
 开发者须返回 `code=200`，且 `data.confirmResult` 为字符串 `"true"`。POST 失败会重试，默认最多 5 次，处理须按 `taskId` 幂等。
 
 连通性探测（GET 回显 `echostr`）、统一响应体、来源 IP `39.96.95.150` 与配置步骤见 [自动化消息回调地址配置说明](./auto_message_callback.md)。
 
 错误码：
-
 
 | code     | 描述                              |
 | -------- | ------------------------------- |
