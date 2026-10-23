@@ -52,7 +52,7 @@ Header 信息：查看 [开放平台鉴权](https://doc.233leyuan.com/SDK/open_p
 | scopeType               | int    | 是   | 发送范围。`1` 单个，收件人恰好 1 个；`2` 批量，收件人 1～50 个且 uid 不重复；`3` 按模板类型开关全量发送，`recipients` 必须为空 |
 | timeType                | int    | 是   | 发送时间类型。`1` 实时；`2` 定时                                                               |
 | sendTime                | long   | 否   | 定时发送的毫秒时间戳。`timeType=2` 时必填，且必须大于当前时间；实时发送留空                                       |
-| commonPlaceholderParams | array  | 否   | 本次任务的公共占位参数；支持通过占位符 `MsgLinkLaunchParams` 传入游戏启动参数。                                |
+| commonPlaceholderParams | array  | 否   | 本次任务的公共占位参数；支持通过占位符 [`MsgLinkLaunchParams`](#msglinklaunchparams-接入说明) 传入游戏启动参数。                                |
 | recipients              | array  | 否   | 收件人。单个、批量发送时必填；全量发送时必须为空                                                           |
 
 `commonPlaceholderParams` / `placeholderParams` 元素：
@@ -67,7 +67,7 @@ Header 信息：查看 [开放平台鉴权](https://doc.233leyuan.com/SDK/open_p
 | 字段                | 类型     | 必填  | 描述                                                                |
 | ----------------- | ------ | --- | ----------------------------------------------------------------- |
 | uid               | string | 是   | 233 用户 ID，与用户校验接口的 `uid` 相同                                       |
-| placeholderParams | array  | 否   | 该用户的个性化占位参数，同名 key 覆盖公共参数；支持通过占位符 `MsgLinkLaunchParams` 传入游戏启动参数。 |
+| placeholderParams | array  | 否   | 该用户的个性化占位参数，同名 key 覆盖公共参数；支持通过占位符 [`MsgLinkLaunchParams`](#msglinklaunchparams-接入说明) 传入游戏启动参数。 |
 
 模板里声明的占位 key 必须给齐。全量发送只校验公共参数；单个、批量按「公共参数 ∪ 该用户参数」校验。
 
@@ -135,5 +135,61 @@ Header 信息：查看 [开放平台鉴权](https://doc.233leyuan.com/SDK/open_p
 | 70000024 | 定时时间非法                          |
 | 70000027 | 占位参数缺失                          |
 | 70000028 | 模板被封禁                           |
+
+## MsgLinkLaunchParams 接入说明
+
+用户点击乐园通知后，乐园打开游戏，并通过启动 Activity 的 Intent 传入业务参数。
+
+```java
+String launchParams = getIntent().getStringExtra("launchParams");
+```
+
+- Extra 的 key 固定为 `launchParams`，区分大小写，类型为 `String`。
+- 平台只透传该字符串。内容格式由双方约定，游戏按约定解析。
+- 参数统一由游戏做 URL 编码后再传入。
+- 约定为 JSON 时，取值可以是 `{"scene":"activity","activityId":"10001"}`。字段仅为示例，不是平台协议。
+
+### Java 接入示例
+
+启动 Activity 需同时处理首次创建和复用：
+
+```java
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+
+public class GameActivity extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        handleLaunchParams(getIntent());
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        handleLaunchParams(intent);
+    }
+
+    private void handleLaunchParams(Intent intent) {
+        if (intent == null) {
+            return;
+        }
+        String launchParams = intent.getStringExtra("launchParams");
+        if (launchParams == null || launchParams.isEmpty()) {
+            return;
+        }
+        // 按约定解析 launchParams。若登录或初始化尚未完成，先暂存，就绪后再处理。
+    }
+}
+```
+
+### 接入注意事项
+
+- 启动 Activity 被复用时，新参数从 `onNewIntent` 进入。需先 `setIntent(intent)`，后续 `getIntent()` 才能取到新值。
+- 若先经过闪屏、登录等页面，由游戏把 `launchParams` 传到实际处理业务的页面。
+- 解析失败不影响正常启动。页面重建或再次进入可能收到相同参数，是否去重由业务决定。
 
 
